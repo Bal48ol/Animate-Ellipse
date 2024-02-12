@@ -1,12 +1,53 @@
 package dto;
 
-public class Ellipse {
-    private double speed;
-    private boolean clockwise;
+import java.awt.*;
+import java.awt.geom.*;
 
-    public Ellipse(double speed, boolean clockwise) {
-        this.speed = speed;
-        this.clockwise = clockwise;
+public class Ellipse implements Shape {
+    private double x;
+    private double y;
+    private double width;
+    private double height;
+    private double speed;
+    private double clockwise;
+
+    public Ellipse(double x, double y, double width, double height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
     }
 
     public double getSpeed() {
@@ -17,16 +58,76 @@ public class Ellipse {
         this.speed = speed;
     }
 
-    public boolean isClockwise() {
+    public double isClockwise() {
         return clockwise;
     }
 
-    public void setClockwise(boolean clockwise) {
+    public void setClockwise(double clockwise) {
         this.clockwise = clockwise;
     }
 
+    public double getCenterX() {
+        return getX() + getWidth() / 2.0;
+    }
+
+    public double getCenterY() {
+        return getY() + getHeight() / 2.0;
+    }
+
+    public void setFrame(double x, double y, double w, double h) {
+        this.x = x;
+        this.y = y;
+        this.width = w;
+        this.height = h;
+    }
+
     @Override
-    public String toString() {
-        return "Ellipse{ speed=" + speed + ", clockwise=" + clockwise + " }";
+    public Rectangle getBounds() {
+        return new Rectangle((int)x, (int)y, (int)width, (int)height);
+    }
+
+    @Override
+    public Rectangle2D getBounds2D() {
+        return new Rectangle2D.Double(x, y, width, height);
+    }
+
+    @Override
+    public boolean contains(double px, double py) {
+        return new Ellipse2D.Double(x, y, width, height).contains(px, py);
+    }
+
+    @Override
+    public boolean contains(Point2D p) {
+        return new Ellipse2D.Double(x, y, width, height).contains(p);
+    }
+
+    @Override
+    public boolean intersects(double px, double py, double pw, double ph) {
+        return new Ellipse2D.Double(x, y, width, height).intersects(px, py, pw, ph);
+    }
+
+    @Override
+    public boolean intersects(Rectangle2D r) {
+        return new Ellipse2D.Double(x, y, width, height).intersects(r);
+    }
+
+    @Override
+    public boolean contains(double px, double py, double pw, double ph) {
+        return new Ellipse2D.Double(x, y, width, height).contains(px, py, pw, ph);
+    }
+
+    @Override
+    public boolean contains(Rectangle2D r) {
+        return new Ellipse2D.Double(x, y, width, height).contains(r);
+    }
+
+    @Override
+    public PathIterator getPathIterator(AffineTransform at) {
+        return new Ellipse2D.Double(x, y, width, height).getPathIterator(at);
+    }
+
+    @Override
+    public PathIterator getPathIterator(AffineTransform at, double flatness) {
+        return new Ellipse2D.Double(x, y, width, height).getPathIterator(at, flatness);
     }
 }

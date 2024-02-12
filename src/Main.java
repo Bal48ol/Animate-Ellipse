@@ -1,13 +1,12 @@
 import dto.Ellipse;
 
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
 import javax.swing.*;
 import java.util.ArrayList;
 
 public class Main extends JPanel {
-    private final ArrayList<Ellipse2D.Double> firstEllipses;
-    private final ArrayList<Ellipse2D.Double> otherEllipses;
+    private final ArrayList<Ellipse> firstEllipses;
+    private final ArrayList<Ellipse> otherEllipses;
     private final int initialRadiusX = 100;
     private final int initialRadiusY = 50;
     private int radiusX = initialRadiusX;
@@ -17,9 +16,7 @@ public class Main extends JPanel {
     private double rotationIncrement = 0.1;
     private int timerDelay = 100;
     private final JSlider speedSliderFirstEllipse;
-    private JButton reverseButtonFirstEllipse;
     private final JSlider speedSliderOtherEllipses;
-    private JButton reverseButtonOtherEllipses;
     private int firstEllipseIndex = -1;
 
     public Main() {
@@ -37,22 +34,17 @@ public class Main extends JPanel {
         speedSliderFirstEllipse = new JSlider(JSlider.HORIZONTAL, 0, 300, 150);
         speedSliderFirstEllipse.setPreferredSize(new Dimension(400, speedSliderFirstEllipse.getPreferredSize().height));
         speedSliderFirstEllipse.setBackground(Color.black);
-        reverseButtonFirstEllipse = new JButton("Изменить направление вращения (первый эллипсы)");
+        JButton reverseButtonFirstEllipse = new JButton("Изменить направление вращения (первый эллипсы)");
 
         speedSliderOtherEllipses = new JSlider(JSlider.HORIZONTAL, 0, 300, 150);
         speedSliderOtherEllipses.setPreferredSize(new Dimension(400, speedSliderOtherEllipses.getPreferredSize().height));
         speedSliderOtherEllipses.setBackground(Color.black);
-        reverseButtonOtherEllipses = new JButton("Изменить направление вращения (остальные эллипсы)");
+        JButton reverseButtonOtherEllipses = new JButton("Изменить направление вращения (остальные эллипсы)");
 
         speedSliderFirstEllipse.addChangeListener(e -> {
             int value = speedSliderFirstEllipse.getValue();
             timerDelay = 300 - value;
             timer.setDelay(timerDelay);
-//            if (!firstEllipses.isEmpty()) {
-//                Ellipse firstEllipse = firstEllipses.get(0);
-//                firstEllipse.setSpeed(value);
-//                firstEllipses.set(0, firstEllipse); // Обновить объект в списке
-//            }
         });
 
         reverseButtonFirstEllipse.addActionListener(e -> {
@@ -81,7 +73,7 @@ public class Main extends JPanel {
     }
 
     private void addEllipse() {
-        Ellipse2D.Double ellipse = new Ellipse2D.Double(xPosition, (double) getHeight() / 2 - radiusY, 2 * radiusX, 2 * radiusY);
+        Ellipse ellipse = new Ellipse(xPosition, (double) getHeight() / 2 - radiusY, 2 * radiusX, 2 * radiusY);
 
         if (firstEllipses.isEmpty()) {
             firstEllipses.add(ellipse);
@@ -92,7 +84,7 @@ public class Main extends JPanel {
 
         if (!otherEllipses.isEmpty()) {
             int prevIndex = otherEllipses.size() - 1;
-            Ellipse2D.Double prevEllipse = otherEllipses.get(prevIndex);
+            Ellipse prevEllipse = otherEllipses.get(prevIndex);
             xPosition = (int) (prevEllipse.getCenterX());
             ellipse.setFrame(xPosition, (double) getHeight() / 2 - radiusY, 2 * radiusX, 2 * radiusY);
         }
@@ -112,7 +104,7 @@ public class Main extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
 
         for (int i = 0; i < firstEllipses.size() + otherEllipses.size(); i++) {
-            Ellipse2D.Double ellipse;
+            Ellipse ellipse;
             if (i < firstEllipses.size()) {
                 ellipse = firstEllipses.get(i);
             } else {
