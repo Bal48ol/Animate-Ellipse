@@ -9,7 +9,7 @@ public class Ellipse implements Shape {
     private double width;
     private double height;
     private double speed;
-    private double clockwise;
+    private double rotationIncrement;
 
     public Ellipse(double x, double y, double width, double height) {
         this.x = x;
@@ -58,12 +58,12 @@ public class Ellipse implements Shape {
         this.speed = speed;
     }
 
-    public double isClockwise() {
-        return clockwise;
+    public void setRotationIncrement(double increment) {
+        this.rotationIncrement = increment;
     }
 
-    public void setClockwise(double clockwise) {
-        this.clockwise = clockwise;
+    public double getRotationIncrement() {
+        return this.rotationIncrement;
     }
 
     public double getCenterX() {

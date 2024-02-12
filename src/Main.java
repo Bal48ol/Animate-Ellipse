@@ -16,7 +16,6 @@ public class Main extends JPanel {
     private double rotationIncrement = 0.1;
     private int timerDelay = 100;
     private final JSlider speedSliderFirstEllipse;
-    private final JSlider speedSliderOtherEllipses;
     private int firstEllipseIndex = -1;
 
     public Main() {
@@ -34,12 +33,7 @@ public class Main extends JPanel {
         speedSliderFirstEllipse = new JSlider(JSlider.HORIZONTAL, 0, 300, 150);
         speedSliderFirstEllipse.setPreferredSize(new Dimension(400, speedSliderFirstEllipse.getPreferredSize().height));
         speedSliderFirstEllipse.setBackground(Color.black);
-        JButton reverseButtonFirstEllipse = new JButton("Изменить направление вращения (первый эллипсы)");
-
-        speedSliderOtherEllipses = new JSlider(JSlider.HORIZONTAL, 0, 300, 150);
-        speedSliderOtherEllipses.setPreferredSize(new Dimension(400, speedSliderOtherEllipses.getPreferredSize().height));
-        speedSliderOtherEllipses.setBackground(Color.black);
-        JButton reverseButtonOtherEllipses = new JButton("Изменить направление вращения (остальные эллипсы)");
+        JButton reverseButtonFirstEllipse = new JButton("Изменить направление вращения");
 
         speedSliderFirstEllipse.addChangeListener(e -> {
             int value = speedSliderFirstEllipse.getValue();
@@ -51,24 +45,11 @@ public class Main extends JPanel {
             rotationIncrement = -rotationIncrement;
         });
 
-        speedSliderOtherEllipses.addChangeListener(e -> {
-            int value = speedSliderOtherEllipses.getValue();
-            timerDelay = 300 - value;
-            timer.setDelay(timerDelay);
-        });
-
-        reverseButtonOtherEllipses.addActionListener(e -> {
-            rotationIncrement = -rotationIncrement;
-        });
-
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.black);
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.add(reverseButtonFirstEllipse);
         buttonPanel.add(speedSliderFirstEllipse);
-        buttonPanel.add(reverseButtonOtherEllipses);
-        buttonPanel.add(speedSliderOtherEllipses);
-
         add(buttonPanel);
     }
 
