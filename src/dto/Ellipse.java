@@ -8,8 +8,6 @@ public class Ellipse implements Shape {
     private double y;
     private double width;
     private double height;
-    private double speed;
-    private double rotationIncrement;
 
     public Ellipse(double x, double y, double width, double height) {
         this.x = x;
@@ -22,48 +20,16 @@ public class Ellipse implements Shape {
         return x;
     }
 
-    public void setX(double x) {
-        this.x = x;
-    }
-
     public double getY() {
         return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
     }
 
     public double getWidth() {
         return width;
     }
 
-    public void setWidth(double width) {
-        this.width = width;
-    }
-
     public double getHeight() {
         return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
-
-    public double getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(double speed) {
-        this.speed = speed;
-    }
-
-    public void setRotationIncrement(double increment) {
-        this.rotationIncrement = increment;
-    }
-
-    public double getRotationIncrement() {
-        return this.rotationIncrement;
     }
 
     public double getCenterX() {
