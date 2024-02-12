@@ -11,16 +11,14 @@ import javafx.scene.shape.Ellipse;
 import javafx.stage.Stage;
 
 public class HelloApplication extends Application {
-
     private Ellipse ellipse;
     private double angle = 0;
     private double rotationSpeed = 1;
     private boolean isReverse = false;
-
-    private Ellipse[] ellipses = new Ellipse[6];
-    private double[] angles = new double[6];
-    private double[] rotationSpeeds = new double[6];
-    private boolean[] isReverses = new boolean[6];
+    private final Ellipse[] ellipses = new Ellipse[6];
+    private final double[] angles = new double[6];
+    private final double[] rotationSpeeds = new double[6];
+    private final boolean[] isReverses = new boolean[6];
 
     @Override
     public void start(Stage stage) {
@@ -46,7 +44,7 @@ public class HelloApplication extends Application {
         });
         root.getChildren().add(slider);
 
-        Button reverseButton = new Button("Reverse Rotation");
+        Button reverseButton = new Button(" First Ellipse Reverse Rotation");
         reverseButton.setLayoutX(300);
         reverseButton.setLayoutY(70);
         reverseButton.setOnAction(event -> {
@@ -64,9 +62,9 @@ public class HelloApplication extends Application {
         });
         root.getChildren().add(slider2);
 
-        Button reverseButton2 = new Button("Reverse Rotation");
-        reverseButton2.setLayoutX(450);
-        reverseButton2.setLayoutY(70);
+        Button reverseButton2 = new Button("Other Ellipses Reverse Rotation");
+        reverseButton2.setLayoutX(300);
+        reverseButton2.setLayoutY(100);
         reverseButton2.setOnAction(event -> {
             for (int i = 0; i < 6; i++) {
                 isReverses[i] = !isReverses[i];
