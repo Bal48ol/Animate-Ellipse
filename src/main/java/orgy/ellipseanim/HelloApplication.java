@@ -37,43 +37,37 @@ public class HelloApplication extends Application {
         }
 
         Slider slider = new Slider(0, 10, 1);
-        slider.setLayoutX(300);
-        slider.setLayoutY(50);
-        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            rotationSpeed = newValue.doubleValue();
-        });
+        slider.setLayoutX(10);
+        slider.setLayoutY(130);
+        slider.valueProperty().addListener((observable, oldValue, newValue) -> rotationSpeed = newValue.doubleValue());
         root.getChildren().add(slider);
 
-        Button reverseButton = new Button(" First Ellipse Reverse Rotation");
-        reverseButton.setLayoutX(300);
-        reverseButton.setLayoutY(70);
-        reverseButton.setOnAction(event -> {
-            isReverse = !isReverse;
-        });
+        Button reverseButton = new Button("Reverse Rotation Red");
+        reverseButton.setLayoutX(10);
+        reverseButton.setLayoutY(150);
+        reverseButton.setOnAction(event -> isReverse = !isReverse);
         root.getChildren().add(reverseButton);
 
-        Slider slider2 = new Slider(0, 10, 1);
-        slider2.setLayoutX(450);
-        slider2.setLayoutY(50);
-        slider2.valueProperty().addListener((observable, oldValue, newValue) -> {
-            for (int i = 0; i < 6; i++) {
-                rotationSpeeds[i] = newValue.doubleValue();
-            }
-        });
-        root.getChildren().add(slider2);
+        Slider[] sliders = new Slider[6];
+        Button[] reverseButtons = new Button[6];
+        for (int i = 0; i < 6; i++) {
+            sliders[i] = new Slider(0, 10, 1);
+            sliders[i].setLayoutX(10 + (i + 1) * 150);
+            sliders[i].setLayoutY(130);
+            int finalI = i;
+            sliders[i].valueProperty().addListener((observable, oldValue, newValue) -> rotationSpeeds[finalI] = newValue.doubleValue());
+            root.getChildren().add(sliders[i]);
 
-        Button reverseButton2 = new Button("Other Ellipses Reverse Rotation");
-        reverseButton2.setLayoutX(300);
-        reverseButton2.setLayoutY(100);
-        reverseButton2.setOnAction(event -> {
-            for (int i = 0; i < 6; i++) {
-                isReverses[i] = !isReverses[i];
-            }
-        });
-        root.getChildren().add(reverseButton2);
+            reverseButtons[i] = new Button("Reverse Rotation " + i);
+            reverseButtons[i].setLayoutX(10 + (i + 1) * 150);
+            reverseButtons[i].setLayoutY(150);
+            int finalI1 = i;
+            reverseButtons[i].setOnAction(event -> isReverses[finalI1] = !isReverses[finalI1]);
+            root.getChildren().add(reverseButtons[i]);
+        }
 
-        Scene scene = new Scene(root, 600, 200);
-        stage.setTitle("Hello!");
+        Scene scene = new Scene(root, 1100, 200);
+        stage.setTitle("Ellipse Anim!");
         stage.setScene(scene);
         stage.show();
 
