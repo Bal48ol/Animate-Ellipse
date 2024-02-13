@@ -48,6 +48,17 @@ public class HelloApplication extends Application {
         reverseButton.setOnAction(event -> isReverse = !isReverse);
         root.getChildren().add(reverseButton);
 
+        Button syncButton = new Button("Sync");
+        syncButton.setLayoutX(10);
+        syncButton.setLayoutY(180);
+        syncButton.setOnAction(event -> {
+            for (int i = 0; i < 6; i++) {
+                rotationSpeeds[i] = rotationSpeed;
+                isReverses[i] = isReverse;
+            }
+        });
+        root.getChildren().add(syncButton);
+
         Slider[] sliders = new Slider[6];
         Button[] reverseButtons = new Button[6];
         for (int i = 0; i < 6; i++) {
@@ -66,7 +77,7 @@ public class HelloApplication extends Application {
             root.getChildren().add(reverseButtons[i]);
         }
 
-        Scene scene = new Scene(root, 1100, 200);
+        Scene scene = new Scene(root, 1100, 220);
         stage.setTitle("Ellipse Anim!");
         stage.setScene(scene);
         stage.show();
